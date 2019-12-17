@@ -1,0 +1,14 @@
+version: '3'
+services:
+  texlive:
+    build: .
+    image: texlive
+  sut:
+    image: kiwicom/dgoss
+    environment:
+      GOSS_FILES_PATH: /sut
+      GOSS_FILES_STRATEGY: cp
+    command: /usr/local/bin/dgoss run -it texlive
+    volumes:
+      - ./sut:/sut
+      - /var/run/docker.sock:/var/run/docker.sock
